@@ -1,0 +1,488 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Lightmaps/LightMap.png" type="Texture" id=1]
+[ext_resource path="res://Modular/Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Materials/lightmapped.shader" type="Shader" id=4]
+[ext_resource path="res://Materials/stone_blocks_by_agf81.jpg" type="Texture" id=6]
+[ext_resource path="res://Materials/Bricks18_col_1024.jpg" type="Texture" id=7]
+[ext_resource path="res://Modular/Wall_Door_Centre.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Modular/Wall.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Modular/portal_large.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Modular/Box.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Modular/Light.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Modular/portal.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Modular/PRoom.tscn" type="PackedScene" id=22]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "Plane"
+surfaces/0 = {
+"aabb": AABB( -1, 0, -1, 2.00001, 1e-05, 2.00001 ),
+"array_data": PoolByteArray( 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 127, 0, 0, 127, 0, 0, 127, 255, 59, 255, 59, 255, 59, 255, 59, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 127, 0, 0, 127, 0, 0, 127, 141, 6, 141, 6, 141, 6, 141, 6, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 127, 0, 0, 127, 0, 0, 127, 142, 6, 255, 59, 142, 6, 255, 59, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 127, 0, 0, 127, 0, 0, 127, 255, 59, 141, 6, 255, 59, 141, 6 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97591,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/texture_lightmap = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/texture_lightmap = ExtResource( 1 )
+
+[sub_resource type="PrismMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.0666667, 0.952941, 0.164706, 1 )
+
+[node name="Level" type="Spatial"]
+
+[node name="room_myroom_x0y0" parent="." instance=ExtResource( 22 )]
+
+[node name="Floor" parent="room_myroom_x0y0" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x0y0" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x0y0" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x1y0" parent="room_myroom_x0y0" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x0y1" parent="room_myroom_x0y0" instance=ExtResource( 12 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@2" parent="room_myroom_x0y0" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x0y0" instance=ExtResource( 14 )]
+transform = Transform( -0.528241, 0, -0.284538, 0, 0.6, 0, 0.284538, 0, -0.528241, -0.976035, 0, -0.952302 )
+
+[node name="Spotlight" parent="room_myroom_x0y0" instance=ExtResource( 17 )]
+transform = Transform( 0.391649, 0.0918583, -0.915518, 0, 0.995004, 0.0998335, 0.920115, -0.0390997, 0.389692, 0.221284, 0.365373, -0.82003 )
+
+[node name="MeshInstance" type="MeshInstance" parent="room_myroom_x0y0/Spotlight"]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, -0.1, 0, 0.2, -1.62921e-08, 0, 0, 0.5 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="room_myroom_x1y0" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="Floor" parent="room_myroom_x1y0" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x1y0" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="@Wall@3" parent="room_myroom_x1y0" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall@4" parent="room_myroom_x1y0" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x1y0" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="Box" parent="room_myroom_x1y0" instance=ExtResource( 14 )]
+transform = Transform( 0.464582, 0, -0.379688, 0, 0.6, 0, 0.379688, 0, 0.464582, -0.678475, 0, 0.193389 )
+
+[node name="room_myroom_x2y0" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="Floor" parent="room_myroom_x2y0" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x2y0" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x2y0" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x3y0" parent="room_myroom_x2y0" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x2y1" parent="room_myroom_x2y0" instance=ExtResource( 12 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@5" parent="room_myroom_x2y0" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x2y0" instance=ExtResource( 14 )]
+transform = Transform( 0.397866, 0, -0.449113, 0, 0.6, 0, 0.449113, 0, 0.397866, 0.0156539, 0, -1.17444 )
+
+[node name="@Box@6" parent="room_myroom_x2y0" instance=ExtResource( 14 )]
+transform = Transform( -0.552383, 0, -0.234251, 0, 0.6, 0, 0.234251, 0, -0.552383, -0.604754, 0, 0.296932 )
+
+[node name="room_myroom_x3y0" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
+
+[node name="Floor" parent="room_myroom_x3y0" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x3y0" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="@Wall@7" parent="room_myroom_x3y0" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x3y0" instance=ExtResource( 8 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="portal_myroom_x3y1" parent="room_myroom_x3y0" instance=ExtResource( 18 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall_Door_Centre@8" parent="room_myroom_x3y0" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="Box" parent="room_myroom_x3y0" instance=ExtResource( 14 )]
+transform = Transform( 0.29119, 0, -0.524603, 0, 0.6, 0, 0.524603, 0, 0.29119, 0.76717, 0, 0.25635 )
+
+[node name="@Box@9" parent="room_myroom_x3y0" instance=ExtResource( 14 )]
+transform = Transform( -0.319068, 0, -0.50813, 0, 0.6, 0, 0.50813, 0, -0.319068, -0.698668, 0, 0.341278 )
+
+[node name="room_myroom_x0y1" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+
+[node name="Floor" parent="room_myroom_x0y1" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x0y1" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x0y1" instance=ExtResource( 8 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="portal_myroom_x0y2" parent="room_myroom_x0y1" instance=ExtResource( 18 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@10" parent="room_myroom_x0y1" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Spotlight" parent="room_myroom_x0y1" instance=ExtResource( 17 )]
+transform = Transform( -0.942724, 0.0333018, -0.331907, 0, 0.995004, 0.0998334, 0.333573, 0.0941154, -0.938014, 0.027585, 0.448705, -0.0393982 )
+
+[node name="MeshInstance" type="MeshInstance" parent="room_myroom_x0y1/Spotlight"]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, -0.1, 0, 0.2, -1.62921e-08, 0, 0, 0.5 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="room_myroom_x1y1" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4 )
+
+[node name="Floor" parent="room_myroom_x1y1" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x1y1" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="@Wall@11" parent="room_myroom_x1y1" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="portal_myroom_x1y2" parent="room_myroom_x1y1" instance=ExtResource( 12 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@12" parent="room_myroom_x1y1" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x1y1" instance=ExtResource( 14 )]
+transform = Transform( -0.188344, 0, -0.569672, 0, 0.6, 0, 0.569672, 0, -0.188344, 0.41244, 0, -0.819571 )
+
+[node name="Spotlight" parent="room_myroom_x1y1" instance=ExtResource( 17 )]
+transform = Transform( 0.58509, -0.0809617, 0.806917, 0, 0.995004, 0.0998334, -0.810968, -0.0584116, 0.582167, -1.7999, 0.778888, 1.84604 )
+
+[node name="MeshInstance" type="MeshInstance" parent="room_myroom_x1y1/Spotlight"]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, -0.1, 0, 0.2, -1.62921e-08, 0, 0, 0.5 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="room_myroom_x2y1" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4 )
+
+[node name="Floor" parent="room_myroom_x2y1" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x2y1" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall@13" parent="room_myroom_x2y1" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall@14" parent="room_myroom_x2y1" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x2y1" instance=ExtResource( 14 )]
+transform = Transform( 0.29802, 0, -0.520754, 0, 0.6, 0, 0.520754, 0, 0.29802, 0.133556, 0, -0.329591 )
+
+[node name="@Box@15" parent="room_myroom_x2y1" instance=ExtResource( 14 )]
+transform = Transform( 0.557703, 0, -0.221287, 0, 0.6, 0, 0.221287, 0, 0.557703, -0.956364, 0, 0.235582 )
+
+[node name="room_myroom_x3y1" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4 )
+
+[node name="Floor" parent="room_myroom_x3y1" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x3y1" instance=ExtResource( 8 )]
+
+[node name="Wall" parent="room_myroom_x3y1" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall_Door_Centre@16" parent="room_myroom_x3y1" instance=ExtResource( 8 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="portal_myroom_x3y2" parent="room_myroom_x3y1" instance=ExtResource( 18 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@17" parent="room_myroom_x3y1" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="room_myroom_x0y2" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
+
+[node name="Floor" parent="room_myroom_x0y2" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x0y2" instance=ExtResource( 8 )]
+
+[node name="@Wall_Door_Centre@18" parent="room_myroom_x0y2" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x1y2" parent="room_myroom_x0y2" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="@Wall_Door_Centre@19" parent="room_myroom_x0y2" instance=ExtResource( 8 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="portal_myroom_x0y3" parent="room_myroom_x0y2" instance=ExtResource( 18 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="Wall" parent="room_myroom_x0y2" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x0y2" instance=ExtResource( 14 )]
+transform = Transform( 0.374091, 0, 0.469101, 0, 0.6, 0, -0.469101, 0, 0.374091, -0.975996, 0, 0.31754 )
+
+[node name="@Box@20" parent="room_myroom_x0y2" instance=ExtResource( 14 )]
+transform = Transform( 0.00420099, 0, 0.599985, 0, 0.6, 0, -0.599985, 0, 0.00420099, 1.2154, 0, 0.00183105 )
+
+[node name="room_myroom_x1y2" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8 )
+
+[node name="Floor" parent="room_myroom_x1y2" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x1y2" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x2y2" parent="room_myroom_x1y2" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="Wall" parent="room_myroom_x1y2" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall_Door_Centre@21" parent="room_myroom_x1y2" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="room_myroom_x2y2" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8 )
+
+[node name="Floor" parent="room_myroom_x2y2" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x2y2" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="@Wall@22" parent="room_myroom_x2y2" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x2y2" instance=ExtResource( 8 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="portal_myroom_x2y3" parent="room_myroom_x2y2" instance=ExtResource( 18 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall_Door_Centre@23" parent="room_myroom_x2y2" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="room_myroom_x3y2" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 8 )
+
+[node name="Floor" parent="room_myroom_x3y2" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x3y2" instance=ExtResource( 8 )]
+
+[node name="Wall" parent="room_myroom_x3y2" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="portal_myroom_x3y3" parent="room_myroom_x3y2" instance=ExtResource( 12 )]
+transform = Transform( 1.50995e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 1.50995e-08, 0, 0, 0 )
+
+[node name="@Wall@24" parent="room_myroom_x3y2" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Box" parent="room_myroom_x3y2" instance=ExtResource( 14 )]
+transform = Transform( -0.549203, 0, 0.241611, 0, 0.6, 0, -0.241611, 0, -0.549203, -0.279596, 0, -1.01962 )
+
+[node name="room_myroom_x0y3" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )
+
+[node name="Floor" parent="room_myroom_x0y3" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x0y3" instance=ExtResource( 8 )]
+
+[node name="@Wall_Door_Centre@25" parent="room_myroom_x0y3" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x1y3" parent="room_myroom_x0y3" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="Wall" parent="room_myroom_x0y3" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall@26" parent="room_myroom_x0y3" instance=ExtResource( 10 )]
+transform = Transform( 6.27833e-08, 0, -0.2, 0, 0.2, 0, 0.2, 0, 6.27833e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="room_myroom_x1y3" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12 )
+
+[node name="Floor" parent="room_myroom_x1y3" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x1y3" instance=ExtResource( 10 )]
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x1y3" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x2y3" parent="room_myroom_x1y3" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="@Wall@27" parent="room_myroom_x1y3" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall_Door_Centre@28" parent="room_myroom_x1y3" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="Box" parent="room_myroom_x1y3" instance=ExtResource( 14 )]
+transform = Transform( -0.542542, 0, -0.256218, 0, 0.6, 0, 0.256218, 0, -0.542542, 0.995049, 0, 0.228369 )
+
+[node name="Spotlight" parent="room_myroom_x1y3" instance=ExtResource( 17 )]
+transform = Transform( 0.763394, -0.0644858, 0.642707, 0, 0.995004, 0.0998335, -0.645934, -0.0762122, 0.75958, -0.0117874, 0.971256, 0.530506 )
+
+[node name="MeshInstance" type="MeshInstance" parent="room_myroom_x1y3/Spotlight"]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, -0.1, 0, 0.2, -1.62921e-08, 0, 0, 0.5 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="room_myroom_x2y3" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 12 )
+
+[node name="Floor" parent="room_myroom_x2y3" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x2y3" instance=ExtResource( 8 )]
+
+[node name="@Wall_Door_Centre@29" parent="room_myroom_x2y3" instance=ExtResource( 8 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="portal_myroom_x3y3" parent="room_myroom_x2y3" instance=ExtResource( 18 )]
+transform = Transform( 0.2, 0, 2.38418e-08, 0, 0.2, 0, -2.38418e-08, 0, 0.2, 0, 0, 0 )
+
+[node name="Wall" parent="room_myroom_x2y3" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall_Door_Centre@30" parent="room_myroom_x2y3" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="Box" parent="room_myroom_x2y3" instance=ExtResource( 14 )]
+transform = Transform( 0.417332, 0, 0.431085, 0, 0.6, 0, -0.431085, 0, 0.417332, 0.936204, 0, -1.10062 )
+
+[node name="@Box@31" parent="room_myroom_x2y3" instance=ExtResource( 14 )]
+transform = Transform( -0.306173, 0, 0.516002, 0, 0.6, 0, -0.516002, 0, -0.306173, -0.0857248, 0, -0.225019 )
+
+[node name="room_myroom_x3y3" parent="." instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 12 )
+
+[node name="Floor" parent="room_myroom_x3y3" instance=ExtResource( 3 )]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Wall" parent="room_myroom_x3y3" instance=ExtResource( 10 )]
+transform = Transform( -5.6426e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -5.6426e-08, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="@Wall@32" parent="room_myroom_x3y3" instance=ExtResource( 10 )]
+transform = Transform( 0.2, 0, 4.76837e-08, 0, 0.2, 0, -4.76837e-08, 0, 0.2, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[node name="Wall_Door_Centre" parent="room_myroom_x3y3" instance=ExtResource( 8 )]
+transform = Transform( -0.2, 0, -3.01991e-08, 0, 0.2, 0, 3.01991e-08, 0, -0.2, 0, 0, 0 )
+
+[node name="Box" parent="room_myroom_x3y3" instance=ExtResource( 14 )]
+transform = Transform( 0.197531, 0, 0.566552, 0, 0.6, 0, -0.566552, 0, 0.197531, 0.906428, 0, 0.867726 )
+
+[node name="@Box@33" parent="room_myroom_x3y3" instance=ExtResource( 14 )]
+transform = Transform( 0.250324, 0, -0.545287, 0, 0.6, 0, 0.545287, 0, 0.250324, 0.461165, 0, -0.582862 )
+
+[node name="Spotlight" parent="room_myroom_x3y3" instance=ExtResource( 17 )]
+transform = Transform( 0.888266, -0.0458564, 0.457035, 0, 0.995004, 0.0998335, -0.459329, -0.0886787, 0.883828, -0.412122, 0.897555, 0.677083 )
+
+[node name="MeshInstance" type="MeshInstance" parent="room_myroom_x3y3/Spotlight"]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, -0.1, 0, 0.2, -1.62921e-08, 0, 0, 0.5 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Modular/wall_door_centre.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Materials/Mat_Wall.tres" type="Material" id=2]
+
+
+[node name="Wall_Door_Centre" type="MeshInstance"]
+transform = Transform( -3.25841e-08, 0, 0.2, 0, 0.2, 0, -0.2, 0, -3.25841e-08, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )

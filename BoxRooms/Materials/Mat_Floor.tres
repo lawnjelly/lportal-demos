@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Materials/stone_blocks_by_agf81.jpg" type="Texture" id=1]
+[ext_resource path="res://Materials/lightmapped.shader" type="Shader" id=2]
+[ext_resource path="res://Lightmaps/LightMap.png" type="Texture" id=3]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/texture_albedo = ExtResource( 1 )
+shader_param/texture_lightmap = ExtResource( 3 )

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Monster/shark.dae" type="PackedScene" id=1]
+[ext_resource path="res://Monster/shark512.jpg" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+
+[node name="shark" index="0" instance=ExtResource( 1 )]
+transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0 )
+
+[node name="PlaneBoned" parent="Armature/Skeleton" index="0"]
+material/0 = SubResource( 1 )
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="2"]
+master_player = NodePath("../AnimationPlayer")
+active = true
+data = {
+"active": true,
+"connections": [ "anim", "out", 0 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "Swim-loop",
+"id": "anim",
+"position": Vector2( 50, 50 ),
+"type": "animation"
+}, {
+"id": "out",
+"position": Vector2( 320, 54 ),
+"type": "output"
+} ]
+}

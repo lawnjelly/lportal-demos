@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Materials/Mat_Box.tres" type="Material" id=1]
+[ext_resource path="res://Modular/Box/box.obj" type="ArrayMesh" id=2]
+
+
+[node name="Box" type="MeshInstance"]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )

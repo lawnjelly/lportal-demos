@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Materials/Mat_Floor.tres" type="Material" id=1]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "Plane"
+surfaces/0 = {
+"aabb": AABB( -1, 0, -1, 2.00001, 1e-05, 2.00001 ),
+"array_data": PoolByteArray( 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 127, 0, 0, 127, 0, 0, 127, 255, 59, 255, 59, 255, 59, 255, 59, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 127, 0, 0, 127, 0, 0, 127, 141, 6, 141, 6, 141, 6, 141, 6, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 127, 0, 0, 127, 0, 0, 127, 142, 6, 255, 59, 142, 6, 255, 59, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 127, 0, 0, 127, 0, 0, 127, 255, 59, 141, 6, 255, 59, 141, 6 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97591,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[node name="Floor" type="MeshInstance"]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )

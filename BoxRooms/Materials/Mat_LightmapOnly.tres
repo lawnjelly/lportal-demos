@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Materials/lightmapped.shader" type="Shader" id=1]
+[ext_resource path="res://Lightmaps/LightMap.png" type="Texture" id=2]
+
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/texture_lightmap = ExtResource( 2 )
