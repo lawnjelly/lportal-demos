@@ -60,3 +60,9 @@ If you look carefully you may see sharks swimming around the level. They are jus
 The sharks will not cull completely correctly because they are moving at random and should really be constrained to moving only through portals. If they pass through a wall for example, LPortal may lose track of which room they should be inside. In a real game you would use something like physics to prevent them moving between rooms except through portals.
 
 Although the sharks don't cast shadows, if the BakedLightmap node is showing, the sharks will change their lighting according to where they are in the level. This is because the BakedLightmap as well as creating a lightmap, also creates a 3d voxel structure which approximately stores the lighting in each cell. This looks nice but of course is expensive at runtime, if you switch off the BakedLightmap you may get an approximate doubling of frame rate.
+
+### Measuring performance
+You can get a very rough idea of overall performance by choosing ProjectSettings->Debug->Settings->PrintFPS ON, then turning off vsync by going to ProjectSettings->Display->Window->Use VSync OFF.
+* Press TAB to turn LPortal on and off and notice differences in fps
+* Try resize the window to postage stamp sized. This in general is a great way to see whether you are limited by fill rate, or by other tasks (primarily geometry processing in this case). If the frame rate increases when in a small window, you are fill rate limited. In this demo on most machines the frame rate should increase in a small window.
+* If you are fill rate limited, you can get faster performance by using simpler shaders, limiting the amount of shadow casters and lights, and decreasing the shadow map resolution.
