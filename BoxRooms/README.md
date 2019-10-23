@@ -30,7 +30,7 @@ We will now go about creating the lightmapped version of the map from the origin
 
 We must now bake the lightmaps:
 
-6) Hide the level.
+6) Hide the 'Level' node.
 7) With the 'Root' node selected, click the chain link again and select `Lightmaps/Lightmap_Proxy.tscn`. This is a merged mesh of the entire level that was created in the previous step.
 8) At this point the level should be hidden, and the proxy only is showing in the viewport. Select the BakedLightmap node, and click 'Bake Lightmaps' (button above the viewport).
 ![bake_proxy](Images/bake_proxy.jpg)
