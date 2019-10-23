@@ -1,5 +1,9 @@
 extends Spatial
 
+##############################
+# Change this from false to true to create the UVs, the proxy, and the final UV mapped level
+var m_bPrepare = false
+##############################
 
 var cam_third
 var cam_first
@@ -14,7 +18,6 @@ var m_bDebugPlanes = false
 var m_bDebugBounds = false
 var m_bMouseCaptured = false
 
-var m_bPrepare = false
 var m_bFirstRun = true
 
 var m_ptVel = Vector3(0, 0, 0)
@@ -24,27 +27,11 @@ var m_MouseSensitivity = 0.003  # radians/pixel
 var m_iDisplayTimeout = 0
 var m_iTick = 0
 
-
-func setup_monsters():
-
-	var mon = load("res://Monster/Monster.tscn")
-	for i in range (4):
-		var m = mon.instance()
-		$Monsters.add_child(m)
-		m.setup(MAP_SIZE_X * 4, MAP_SIZE_Y * 4)
-	pass
-	
-func register_monsters():
-	for i in range ($Monsters.get_child_count()):
-		var mon = $Monsters.get_child(i)
-		m_RoomManager.dob_register(mon, 0.5)
-
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	m_RoomManager = $LRoomManager
-	m_bPrepare = false
 	
 	
 	m_Controller = $Controller
@@ -172,12 +159,14 @@ func _process(delta):
 	pass
 	
 	
+# mouse look
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		m_Controller.rotate_y(-event.relative.x * m_MouseSensitivity)
 		cam_first.rotate_x(-event.relative.y * m_MouseSensitivity)
 		cam_first.rotation.x = clamp(cam_first.rotation.x, -1.2, 1.2)
 		
+# 1st person shooter type control
 func move_firstperson(delta):
 	
 	var angle = 0.0
@@ -214,6 +203,22 @@ func move_firstperson(delta):
 
 	# friction
 	m_ptVel *= 0.9
+
+
+func setup_monsters():
+
+	var mon = load("res://Monster/Monster.tscn")
+	for i in range (4):
+		var m = mon.instance()
+		$Monsters.add_child(m)
+		m.setup(MAP_SIZE_X * 4, MAP_SIZE_Y * 4)
+	pass
+	
+func register_monsters():
+	for i in range ($Monsters.get_child_count()):
+		var mon = $Monsters.get_child(i)
+		m_RoomManager.dob_register(mon, 0.5)
+
 
 func _physics_process(delta):
 	m_iTick += 1

@@ -1,27 +1,22 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Lightmaps/LightMap.png" type="Texture" id=1]
 [ext_resource path="res://world_env.tres" type="Environment" id=2]
 [ext_resource path="res://Root.gd" type="Script" id=3]
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.992157, 0, 0, 1 )
-
-[sub_resource type="CubeMesh" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0.196078, 0.0901961, 1 )
 
-[sub_resource type="PrismMesh" id=5]
+[sub_resource type="PrismMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.898039, 1, 0.00392157, 1 )
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=5]
 
-[sub_resource type="BakedLightmapData" id=8]
+[sub_resource type="BakedLightmapData" id=6]
 bounds = AABB( -8.79012, -0.878886, -8.55315, 17.5802, 1.75777, 17.1063 )
 cell_space_transform = Transform( 1.04167, 0, 0, 0, 1.04167, 0, 0, 0, 1.04167, 9.15638, 0.915506, 8.90953 )
 cell_subdiv = 6
@@ -35,12 +30,6 @@ script = ExtResource( 3 )
 environment = ExtResource( 2 )
 
 [node name="Monsters" type="Spatial" parent="."]
-
-[node name="Indicator" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-visible = false
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
 
 [node name="UI" type="Node2D" parent="."]
 
@@ -64,14 +53,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
 [node name="MeshInstance2" type="MeshInstance" parent="Controller/Camera2"]
 transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 1, 0, 0, -1 )
 cast_shadow = 0
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Controller/Camera2"]
 transform = Transform( 0.3, 0, 0, 0, -4.88762e-08, -0.3, 0, 0.3, -4.88762e-08, 0, 0, 0 )
 cast_shadow = 0
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="Controller/Camera2"]
 transform = Transform( 1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 4, 3 )
@@ -81,7 +70,7 @@ fov = 73.5
 [node name="MeshInstance" type="MeshInstance" parent="Controller"]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 2 )
 visible = false
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="BakedLightmap" type="BakedLightmap" parent="."]
@@ -92,7 +81,7 @@ bake_propagation = 0.8
 bake_extents = Vector3( 8.79012, 0.878886, 8.55315 )
 capture_cell_size = 1.0
 image_path = "res://Lightmaps"
-light_data = SubResource( 8 )
+light_data = SubResource( 6 )
 
 [node name="LRoomManager" type="LRoomManager" parent="."]
 rooms = NodePath("../Level")
