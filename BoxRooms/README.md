@@ -35,3 +35,15 @@ We must now bake the lightmaps:
 ![bake_proxy](Images/bake_proxy.jpg)
 If all goes well you should now see the proxy mesh with a lightmap applied. We now having everything prepared to run the game.
 9) Delete the level node, and the proxy node, then run the game. The script will automatically load the final level if m_bPrepare is set to false.
+
+## Notes
+
+### Preparation phase
+In the preparation run (step 4) the script creates 2 files:
+1) `Lightmaps/Lightmap_Proxy.tscn` - This is the merged mesh containing the whole level, with secondary UV coordinates automatically created by godot
+2) `Levels/Map_Final.tscn` - This is the entire level as loaded before, except also containing secondary UV coordinates that match the proxy mesh.
+
+By lightmapping the proxy we are also creating a single lightmap that will match the original level made up of separate objects. This gets around the Godot limitation that it can only create one lightmap per object (which will end up creating large numbers of lightmaps for a large level).
+
+### Why is the lightmap not baked automatically as part of the preparation phase?
+Why do I have to bake the lightmap manually? This is simply because of a bug in the godot lightmapping code where it currently only works from the editor. Annoying to have an extra step and I will try and encourage the lightmapper to be fixed in core.
