@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/Bricks18_col_1024.jpg-976f29d8aaa2ef5f63ad54c39de6b6ff.s3tc.stex"
+path.etc="res://.import/Bricks18_col_1024.jpg-976f29d8aaa2ef5f63ad54c39de6b6ff.etc.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Materials/Bricks18_col_1024.jpg"
+dest_files=[ "res://.import/Bricks18_col_1024.jpg-976f29d8aaa2ef5f63ad54c39de6b6ff.s3tc.stex", "res://.import/Bricks18_col_1024.jpg-976f29d8aaa2ef5f63ad54c39de6b6ff.etc.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
