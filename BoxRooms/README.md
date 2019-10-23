@@ -65,4 +65,3 @@ Although the sharks don't cast shadows, if the BakedLightmap node is showing, th
 You can get a very rough idea of overall performance by choosing ProjectSettings->Debug->Settings->PrintFPS ON, then turning off vsync by going to ProjectSettings->Display->Window->Use VSync OFF.
 * Press TAB to turn LPortal on and off and notice differences in fps
 * Try resize the window to postage stamp sized. This in general is a great way to see whether you are limited by fill rate, or by other tasks (primarily geometry processing in this case). If the frame rate increases when in a small window, you are fill rate limited. In this demo on most machines the frame rate should increase in a small window.
-* If you are fill rate limited, you can get faster performance by using simpler shaders, limiting the amount of shadow casters and lights, and decreasing the shadow map resolution.
