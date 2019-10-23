@@ -53,3 +53,10 @@ Why do I have to bake the lightmap manually? This is simply because of a bug in 
 You may notice certain bugs when using the internal workflow, that result in incorrect lighting in places. I believe there are bugs in the Godot auto UV mapping (using xatlas), as well as the voxel nature of the Godot lightmap baker which can lead to light leaks. Gradually we hope to fix UV mapping bugs in core, and JFons has been working on an updated ray tracing baker.
 
 Until then if these problems are too much for your game, consider using the external lightmap workflow, where UV mapping and lightmapping is performed in an external modelling program such as Blender.
+
+### Sharks
+If you look carefully you may see sharks swimming around the level. They are just intended as a very rough example of registering and updating DOBs (dynamic objects). Note that they are in the scene graph separately from the levels (room list) itself.
+
+The sharks will not cull completely correctly because they are moving at random and should really be constrained to moving only through portals. If they pass through a wall for example, LPortal may lose track of which room they should be inside. In a real game you would use something like physics to prevent them moving between rooms except through portals.
+
+Although the sharks don't cast shadows, if the BakedLightmap node is showing, the sharks will change their lighting according to where they are in the level. This is because the BakedLightmap as well as creating a lightmap, also creates a 3d voxel structure which approximately stores the lighting in each cell. This looks nice but of course is expensive at runtime, if you switch off the BakedLightmap you may get an approximate doubling of frame rate.
