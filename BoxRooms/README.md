@@ -47,3 +47,8 @@ By lightmapping the proxy we are also creating a single lightmap that will match
 
 ### Why is the lightmap not baked automatically as part of the preparation phase?
 Why do I have to bake the lightmap manually? This is simply because of a bug in the godot lightmapping code where it currently only works from the editor. Annoying to have an extra step and I will try and encourage the lightmapper to be fixed in core.
+
+#### Graphical anomalies
+You may notice certain bugs when using the internal workflow, that result in incorrect lighting in places. I believe there are bugs in the Godot auto UV mapping (using xatlas), as well as the voxel nature of the Godot lightmap baker which can lead to light leaks. Gradually we hope to fix UV mapping bugs in core, and JFons has been working on an updated ray tracing baker.
+
+Until then if these problems are too much for your game, consider using the external lightmap workflow, where UV mapping and lightmapping is performed in an external modelling program such as Blender.
