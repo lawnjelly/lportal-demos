@@ -1,4 +1,4 @@
-# lportal-demos
+# LPortal Demos
 
 LPortal is a Room / Portal culling module for Godot 3.2 onwards.
 
