@@ -1,5 +1,6 @@
 # Box Rooms
 This demo is to show the internal baked lightmap workflow.
+![boxrooms](Images/lportal_boxrooms.jpg)
 
 ## Prerequisites
 Before going through this tutorial, make sure you have been through the Tutorial-Simple tutorial. Also make sure you are familiar with the Godot BakedLightmap node, work through some official Godot tutorials:
