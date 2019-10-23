@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/box.obj-33a260163d4dfef8a5781982166a50c3.mesh"
+
+[deps]
+
+files=[ "res://.import/box.obj-33a260163d4dfef8a5781982166a50c3.mesh" ]
+
+source_file="res://Modular/Box/box.obj"
+dest_files=[ "res://.import/box.obj-33a260163d4dfef8a5781982166a50c3.mesh", "res://.import/box.obj-33a260163d4dfef8a5781982166a50c3.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
