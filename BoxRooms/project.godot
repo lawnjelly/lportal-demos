@@ -45,5 +45,4 @@ quality/shadow_atlas/size=320
 quality/shadow_atlas/size.mobile=512
 quality/shadows/filter_mode=0
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-quality/filters/msaa=4
 environment/default_environment="res://world_env.tres"
