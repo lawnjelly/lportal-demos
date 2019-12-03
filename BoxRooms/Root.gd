@@ -43,7 +43,7 @@ func _ready():
 	#$RoomGroup.rooms_set_logging(0)
 	#$RoomGroup.rooms_set_debug_lights(true)
 	if m_bPrepare:
-		var Merged = m_RoomManager.rooms_convert_lightmap_internal("res://Lightmaps/Lightmap_Proxy.tscn", "res://Levels/Map_Final.tscn")
+		var Merged = m_RoomManager.lightmap_internal("res://Lightmaps/Lightmap_Proxy.tscn", "res://Levels/Map_Final.tscn")
 	else:
 		LoadLevelAndRun()
 
