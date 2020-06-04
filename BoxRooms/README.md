@@ -1,4 +1,5 @@
 # Box Rooms
+#### For LPortal Version 0.2
 This demo is to show the internal baked lightmap workflow.
 ![boxrooms](Images/lportal_boxrooms.jpg)
 
