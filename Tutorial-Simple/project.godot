@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="LPortalTutorial"
+config/name="LPortal Tutorial - Simple"
 run/main_scene="res://Root.tscn"
 config/icon="res://icon.png"
 
