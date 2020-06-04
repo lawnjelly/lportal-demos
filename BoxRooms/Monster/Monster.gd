@@ -10,6 +10,8 @@ var m_yrange
 var m_ptDest = Vector3(0, 1, 0)
 var m_Angle = 0.0
 
+var m_DobID
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
