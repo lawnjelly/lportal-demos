@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="BoxRooms"
+config/name="LPortal Tutorial - BoxRooms"
 run/main_scene="res://Root.tscn"
 config/icon="res://icon.png"
 
