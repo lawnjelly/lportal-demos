@@ -5,8 +5,8 @@ func _ready():
 	
 	$Manager.rooms_convert(true, false)
 	
-	$Manager.rooms_set_camera($Camera)
-	$Manager.dob_register($Camera, 0)
+	var dob_id = $Manager.dob_register($Camera, $Camera.translation, 0)
+	$Manager.rooms_set_camera(dob_id, $Camera)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
