@@ -5,8 +5,14 @@ extends Spatial
 var m_bPrepare = false
 ##############################
 
-var cam_third
-var cam_first
+class MyCam:
+	var node
+	var dob_id
+
+var cam_third : MyCam = MyCam.new()
+var cam_first : MyCam = MyCam.new()
+
+
 var m_Controller
 var m_RoomManager
 var which_cam = 0
@@ -35,8 +41,8 @@ func _ready():
 	
 	
 	m_Controller = $Controller
-	cam_first = $Controller/Camera2
-	cam_third = $Controller/Camera2/Camera
+	cam_first.node = $Controller/Camera2
+	cam_third.node = $Controller/Camera2/Camera
 	
 	#$RoomGroup.light_register($DirectionalLight)
 	
@@ -71,11 +77,11 @@ func LoadLevelAndRun():
 	
 	m_RoomManager.rooms_convert(false, true)
 		
+	cam_first.dob_id = m_RoomManager.dob_register(cam_first.node, cam_first.node.translation, 0)
+	cam_third.dob_id = m_RoomManager.dob_register(cam_third.node, cam_third.node.translation, 0)	
 	
-	m_RoomManager.rooms_set_camera(cam_third)
-	m_RoomManager.rooms_set_camera(cam_first)
-
-	m_RoomManager.dob_register(cam_first, 0)	
+	m_RoomManager.rooms_set_camera(cam_third.dob_id, cam_third.node)
+	m_RoomManager.rooms_set_camera(cam_first.dob_id, cam_first.node)
 	
 	if (m_bFirstRun):
 		setup_monsters()
@@ -107,12 +113,12 @@ func _process(delta):
 		if which_cam == 0:
 			DisplayMessage("1st Person Camera")
 			which_cam = 1
-			cam_first.make_current()
+			cam_first.node.make_current()
 		else:
 			DisplayMessage("3rd Person Camera")
-			cam_third.make_current()
+			cam_third.node.make_current()
 			which_cam = 0
-			m_RoomManager.rooms_set_camera(cam_first)
+			m_RoomManager.rooms_set_camera(cam_first.dob_id, cam_first.node)
 			# force debug output
 			m_RoomManager.rooms_log_frame()
 	
@@ -151,11 +157,11 @@ func _process(delta):
 	
 	move_firstperson(delta)
 	
-	m_RoomManager.dob_update(cam_first)
+	m_RoomManager.dob_update(cam_first.dob_id, cam_first.node.translation)
 		
 	for i in range ($Monsters.get_child_count()):
 		var mon = $Monsters.get_child(i)
-		m_RoomManager.dob_update(mon)
+		m_RoomManager.dob_update(mon.m_DobID, mon.translation)
 	pass
 	
 	
@@ -163,8 +169,8 @@ func _process(delta):
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		m_Controller.rotate_y(-event.relative.x * m_MouseSensitivity)
-		cam_first.rotate_x(-event.relative.y * m_MouseSensitivity)
-		cam_first.rotation.x = clamp(cam_first.rotation.x, -1.2, 1.2)
+		cam_first.node.rotate_x(-event.relative.y * m_MouseSensitivity)
+		cam_first.node.rotation.x = clamp(cam_first.node.rotation.x, -1.2, 1.2)
 		
 # 1st person shooter type control
 func move_firstperson(delta):
@@ -217,7 +223,7 @@ func setup_monsters():
 func register_monsters():
 	for i in range ($Monsters.get_child_count()):
 		var mon = $Monsters.get_child(i)
-		m_RoomManager.dob_register(mon, 0.5)
+		mon.m_DobID = m_RoomManager.dob_register(mon, mon.translation, 0.5)
 
 
 func _physics_process(delta):
