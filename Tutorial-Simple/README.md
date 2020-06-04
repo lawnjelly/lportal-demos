@@ -43,15 +43,18 @@ extends Spatial
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	$Manager.rooms_convert(true, true)
+	$Manager.rooms_convert(true, false)
 	
-	$Manager.rooms_set_camera($Camera)
-	$Manager.dob_register($Camera, 0)
+	var dob_id = $Manager.dob_register($Camera, $Camera.translation, 0)
+	$Manager.rooms_set_camera(dob_id, $Camera)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Camera.rotate_y(delta)
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		$Manager.rooms_log_frame()
 ```
 This script tells LPortal to convert and prepare the rooms for rendering, and sets the camera LPortal will use. You also need to register the camera as a DOB (dynamic object) with LPortal, because it may move around between rooms.
 
