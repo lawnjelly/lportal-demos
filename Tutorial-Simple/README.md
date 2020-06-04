@@ -1,5 +1,5 @@
 # LPortal Simple Tutorial
-#### For LPortal Version 3.2
+#### For LPortal Version 0.2
 
 1) Create a new Godot project, and add a spatial, this will be the root of your scene graph. Name it 'Root'.
 2) Add an LRoomManager node as a child of the Root, and name it 'Manager'. All LPortal functionality works through the LRoomManager.
